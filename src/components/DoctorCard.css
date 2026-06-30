@@ -1,0 +1,42 @@
+.doctor-card {
+  display: flex;
+  gap: 1rem;
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+}
+
+.doctor-photo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.doctor-info h3 {
+  margin: 0 0 0.25rem;
+}
+
+.specialty {
+  color: #0f766e;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+}
+
+.meta {
+  color: #64748b;
+  font-size: 0.9rem;
+  margin: 0 0 0.5rem;
+}
+
+.view-profile-btn {
+  display: inline-block;
+  background-color: #0f766e;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 0.85rem;
+}
