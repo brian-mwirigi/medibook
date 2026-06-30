@@ -3,21 +3,21 @@ import { useTheme } from "../context/ThemeContext";
 import "./Navbar.css";
 
 function Navbar() {
-  const { darkMode, toggleTheme } = useTheme();
+    const { darkMode, toggleTheme } = useTheme();
 
   return (
     <header className="navbar">
       <Link to="/" className="navbar-brand">
-        🩺 MediBook
+          🩺 MediBook
       </Link>
-      <nav className="navbar-links">
+        <nav className="navbar-links">
         <Link to="/">Find a Doctor</Link>
-        <Link to="/appointments">My Appointments</Link>
-        <button className="theme-toggle" onClick={toggleTheme}>
-          {darkMode ? "☀️ Light" : "🌙 Dark"}
-        </button>
+          <Link to="/appointments">My Appointments</Link>
+          <button className="theme-toggle" onClick={toggleTheme}>
+            {darkMode ? "☀️ Light" : "🌙 Dark"}
+          </button>
       </nav>
-    </header>
+      </header>
   );
 }
 

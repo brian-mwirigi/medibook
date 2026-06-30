@@ -6,114 +6,114 @@ import ConfirmDialog from "../components/ConfirmDialog";
 import doctors from "../data/doctors";
 
 function MyAppointmentsPage() {
-  const { appointments, cancelAppointment, editAppointment } = useAppointments();
+    const { appointments, cancelAppointment, editAppointment } = useAppointments();
 
   const [cancelId, setCancelId] = useState(null);
-  const [editingId, setEditingId] = useState(null);
+    const [editingId, setEditingId] = useState(null);
   const [newSlot, setNewSlot] = useState("");
 
   const sortedAppointments = [...appointments].sort(
-    (a, b) => new Date(a.slot) - new Date(b.slot)
-  );
+      (a, b) => new Date(a.slot) - new Date(b.slot)
+    );
 
-  function handleCancel(appointmentId) {
-    setCancelId(appointmentId);
-  }
+    function handleCancel(appointmentId) {
+      setCancelId(appointmentId);
+    }
 
   function confirmCancel() {
     cancelAppointment(cancelId);
-    setCancelId(null);
+      setCancelId(null);
   }
 
-  function closeDialog() {
+    function closeDialog() {
     setCancelId(null);
-  }
+    }
 
   function handleEdit(appointmentId) {
     setEditingId(appointmentId);
-    const appt = appointments.find((a) => a.id === appointmentId);
-    if (appt) {
+      const appt = appointments.find((a) => a.id === appointmentId);
+      if (appt) {
       setNewSlot(appt.slot);
-    }
+      }
   }
 
-  function saveEdit() {
-    if (newSlot) {
-      editAppointment(editingId, newSlot);
-    }
-    setEditingId(null);
+    function saveEdit() {
+      if (newSlot) {
+        editAppointment(editingId, newSlot);
+      }
+      setEditingId(null);
     setNewSlot("");
-  }
+    }
 
   function cancelEdit() {
-    setEditingId(null);
-    setNewSlot("");
+      setEditingId(null);
+      setNewSlot("");
   }
 
   function getSlotsForDoctor(doctorId) {
     const doc = doctors.find((d) => d.id === doctorId);
-    if (doc) {
-      return doc.availableSlots;
-    }
+      if (doc) {
+        return doc.availableSlots;
+      }
     return [];
   }
 
-  function formatSlot(isoString) {
-    const date = new Date(isoString);
+    function formatSlot(isoString) {
+      const date = new Date(isoString);
     return date.toLocaleString(undefined, {
-      weekday: "short",
-      month: "short",
-      day: "numeric",
+        weekday: "short",
+        month: "short",
+        day: "numeric",
       hour: "numeric",
-      minute: "2-digit",
-    });
-  }
+        minute: "2-digit",
+      });
+    }
 
   return (
-    <div className="page-container">
+      <div className="page-container">
       <h1>My Appointments</h1>
 
-      {cancelId && (
+        {cancelId && (
         <ConfirmDialog
-          message="Are you sure you want to cancel this appointment?"
-          onYes={confirmCancel}
+            message="Are you sure you want to cancel this appointment?"
+            onYes={confirmCancel}
           onNo={closeDialog}
-        />
-      )}
+          />
+        )}
 
       {sortedAppointments.length === 0 ? (
-        <div className="empty-state">
+          <div className="empty-state">
           <p>You have no upcoming appointments.</p>
-          <Link to="/" className="book-btn">
-            Find a Doctor
-          </Link>
-        </div>
-      ) : (
-        sortedAppointments.map((appt) => (
-          <div key={appt.id}>
-            <AppointmentCard
-              appointment={appt}
-              onCancel={handleCancel}
-              onEdit={handleEdit}
-            />
-            {editingId === appt.id && (
-              <div className="edit-slot-form">
-                <label>Change time slot: </label>
-                <select value={newSlot} onChange={(e) => setNewSlot(e.target.value)}>
-                  {getSlotsForDoctor(appt.doctorId).map((slot) => (
-                    <option key={slot} value={slot}>
-                      {formatSlot(slot)}
-                    </option>
-                  ))}
-                </select>
-                <button className="book-btn" onClick={saveEdit}>Save</button>
-                <button className="no-btn" onClick={cancelEdit}>Cancel</button>
-              </div>
-            )}
+            <Link to="/" className="book-btn">
+              Find a Doctor
+            </Link>
           </div>
-        ))
-      )}
-    </div>
+        ) : (
+          sortedAppointments.map((appt) => (
+          <div key={appt.id}>
+              <AppointmentCard
+                appointment={appt}
+              onCancel={handleCancel}
+                onEdit={handleEdit}
+              />
+              {editingId === appt.id && (
+              <div className="edit-slot-form">
+                  <label>Change time slot: </label>
+                <select value={newSlot} onChange={(e) => setNewSlot(e.target.value)}>
+                    {getSlotsForDoctor(appt.doctorId).map((slot) => (
+                    <option key={slot} value={slot}>
+                        {formatSlot(slot)}
+                      </option>
+                    ))}
+                  </select>
+                  <button className="book-btn" onClick={saveEdit}>Save</button>
+                <button className="no-btn" onClick={cancelEdit}>Cancel</button>
+                </div>
+              )}
+            </div>
+          ))
+        )}
+      </div>
   );
 }
 

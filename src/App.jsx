@@ -9,34 +9,34 @@ import { ThemeProvider, useTheme } from "./context/ThemeContext";
 import "./App.css";
 
 function AppContent() {
-  const { darkMode } = useTheme();
+    const { darkMode } = useTheme();
 
   return (
     <div className={darkMode ? "app dark" : "app"}>
-      <Navbar />
+    <Navbar />
       <main>
         <Routes>
           <Route path="/" element={<DoctorsListPage />} />
-          <Route path="/doctors/:doctorId" element={<DoctorDetailPage />} />
+            <Route path="/doctors/:doctorId" element={<DoctorDetailPage />} />
           <Route
             path="/doctors/:doctorId/book"
-            element={<BookAppointmentPage />}
-          />
+              element={<BookAppointmentPage />}
+            />
           <Route path="/appointments" element={<MyAppointmentsPage />} />
-        </Routes>
+          </Routes>
       </main>
     </div>
   );
 }
 
 function App() {
-  return (
-    <ThemeProvider>
+    return (
+      <ThemeProvider>
       <AppointmentsProvider>
-        <AppContent />
-      </AppointmentsProvider>
-    </ThemeProvider>
-  );
+          <AppContent />
+        </AppointmentsProvider>
+      </ThemeProvider>
+    );
 }
 
 export default App;
